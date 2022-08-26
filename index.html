@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Horse Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <h1 class="titulo">Juego del Caballo</h1>
+        <div id="box1">
+            <div id="Nivel">Nivel: 1 </div>
+            <div id="Movimientos">Movimientos: 63 </div>
+            <div id="Opciones">Opciones: </div>
+        </div>
+
+        <div class="Tablero">
+            <!-- FILA NRO-0 -->
+            <div class="fila">
+                <div id="c00" class="CasillaOscura"></div>
+                <div id="c01" class="CasillaClara"></div>
+                <div id="c02" class="CasillaOscura"></div>
+                <div id="c03" class="CasillaClara"></div>
+                <div id="c04" class="CasillaOscura"></div>
+                <div id="c05" class="CasillaClara "></div>
+                <div id="c06" class="CasillaOscura"> </div>
+                <div id="c07" class="CasillaClara"></div>
+            </div>
+
+            <!-- FILA NRO-1 -->
+            <div class="fila">
+                <div id="c10" class="CasillaClara"></div>
+                <div id="c11" class="CasillaOscura"></div>
+                <div id="c12" class="CasillaClara"></div>
+                <div id="c13" class="CasillaOscura"></div>
+                <div id="c14" class="CasillaClara"></div>
+                <div id="c15" class="CasillaOscura"></div>
+                <div id="c16" class="CasillaClara"></div>
+                <div id="c17" class="CasillaOscura"></div>
+            </div>
+
+            <!-- FILA NRO-2 -->
+            <div class="fila">
+                <div id="c20" class="CasillaOscura"></div>
+                <div id="c21" class="CasillaClara"></div>
+                <div id="c22" class="CasillaOscura"></div>
+                <div id="c23" class="CasillaClara"></div>
+                <div id="c24" class="CasillaOscura"></div>
+                <div id="c25" class="CasillaClara"></div>
+                <div id="c26" class="CasillaOscura"></div>
+                <div id="c27" class="CasillaClara"></div>
+            </div>
+
+            <!-- FILA NRO-3 -->
+            <div class="fila">
+                <div id="c30" class="CasillaClara"></div>
+                <div id="c31" class="CasillaOscura"></div>
+                <div id="c32" class="CasillaClara"></div>
+                <div id="c33" class="CasillaOscura"></div>
+                <div id="c34" class="CasillaClara"></div>
+                <div id="c35" class="CasillaOscura"></div>
+                <div id="c36" class="CasillaClara"></div>
+                <div id="c37" class="CasillaOscura"></div>
+            </div>
+
+            <!-- FILA NRO-4 -->
+            <div class="fila">
+                <div id="c40" class="CasillaOscura"></div>
+                <div id="c41" class="CasillaClara"></div>
+                <div id="c42" class="CasillaOscura"></div>
+                <div id="c43" class="CasillaClara"></div>
+                <div id="c44" class="CasillaOscura"></div>
+                <div id="c45" class="CasillaClara"></div>
+                <div id="c46" class="CasillaOscura"></div>
+                <div id="c47" class="CasillaClara"></div>
+            </div>
+
+            <!-- FILA NRO-5 -->
+            <div class="fila">
+                <div id="c50" class="CasillaClara"></div>
+                <div id="c51" class="CasillaOscura"></div>
+                <div id="c52" class="CasillaClara"></div>
+                <div id="c53" class="CasillaOscura"></div>
+                <div id="c54" class="CasillaClara"></div>
+                <div id="c55" class="CasillaOscura"></div>
+                <div id="c56" class="CasillaClara"></div>
+                <div id="c57" class="CasillaOscura"></div>
+            </div>
+
+            <!-- FILA NRO-6 -->
+            <div class="fila">
+                <div id="c60" class="CasillaOscura"></div>
+                <div id="c61" class="CasillaClara"></div>
+                <div id="c62" class="CasillaOscura"></div>
+                <div id="c63" class="CasillaClara"></div>
+                <div id="c64" class="CasillaOscura"></div>
+                <div id="c65" class="CasillaClara"></div>
+                <div id="c66" class="CasillaOscura"></div>
+                <div id="c67" class="CasillaClara"></div>
+            </div>
+
+            <!-- FILA NRO-7 -->
+            <div class="fila">
+                <div id="c70" class="CasillaClara"></div>
+                <div id="c71" class="CasillaOscura"></div>
+                <div id="c72" class="CasillaClara"></div>
+                <div id="c73" class="CasillaOscura"></div>
+                <div id="c74" class="CasillaClara"></div>
+                <div id="c75" class="CasillaOscura"></div>
+                <div id="c76" class="CasillaClara"></div>
+                <div id="c77" class="CasillaOscura"></div>
+            </div>
+
+            
+        </div>
+        <div id="box2">
+            <div id="Vidas">Vidas: </div>
+            <div id="Tiempo">Tiempo: 00:00</div>
+            <div id="Movimientos_faltantes">Movimientos faltantes bonus:</div>
+            <div id="Bonus">Bonus: </div>
+        </div>
+    </div>
+
+
+    <script src="niveles.js"></script>
+    <script src="script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetAlert.js"></script>
+</body>
+</html>

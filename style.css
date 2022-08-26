@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: linear-gradient(rgb(21, 44, 68), rgb(44, 103, 143));
+    height: 100vh;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-areas: 
+    "header header header"
+    "aside1 main aside2";
+    height: 100%;
+    width: 100%;
+}
+
+.titulo{
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    grid-area: header
+}
+
+#box1{
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    margin: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    box-shadow: 0px 0px 6px 8px rgb(5, 98, 141),
+        0px 0px 0px 16px rgb(6, 55, 83);
+    box-sizing: content-box;
+    background-color: white;
+    grid-area: aside1
+}
+
+#box1 div {
+    margin: 20px auto ;
+}
+
+#box2 div {
+    margin: 20px auto ;
+}
+
+
+#box2{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    font-size: 20px;
+    margin: auto;
+    box-shadow: 0px 0px 6px 8px rgb(5, 98, 141),
+        0px 0px 0px 16px rgb(6, 55, 83);
+    box-sizing: content-box;
+    padding-left: 10px;
+    padding-top: 10px;
+    border: 2px solid black;
+    grid-area: aside2
+}
+
+.Tablero {
+    width: 560px;
+    height: 560px;
+    margin:  auto;
+    box-shadow: 0px 0px 6px 8px rgb(5, 98, 141),
+        0px 0px 0px 16px rgb(6, 55, 83);
+    box-sizing: content-box;
+    cursor: pointer;
+    margin-top: 15px;
+    grid-area: main
+    
+}
+
+.Tablero .fila{
+    display: flex;
+}
+
+.Tablero .fila .CasillaClara {
+    background-color: white;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    user-select: none;
+    font-size: 60px;
+    color: rgb(9, 31, 46);
+    text-shadow: 0px .5px rgb(4, 50, 82);
+}
+
+.Tablero .fila .CasillaOscura {
+    background-color: rgb(107, 146, 155);
+    width: 70px;
+    height: 70px;
+    font-size: 60px;
+    text-align: center;
+}
+
+.rojo{
+    background-color: #900;
+}
