@@ -4,20 +4,24 @@ var celdaAnterior;
 var celda;
 var celda1;
 let miArray = [];
+let arrayLimpiar = [];
 let tablero = new Array(8);
-var movimientos;
+var movimientos = 64;
 var opciones;
 var x1;
 var y1;
+var x;
+var y;
 var caja1;
 let arrayBonus = [];
-var bonus;
+var bonus = 0;
 var celda_bonus;
 var chequeoCeldaRequerido;
-var movimientosFaltantesBonus;
-var movimientosTotales;
-var nivel;
-var vidas;
+var movimientosFaltantesBonus = 10;
+var movimientosTotales = 64;
+var nivel = 1;
+var vidas = 1;
+var siguiente_nivel = false;
 
 function pad(val) {
     let valString = val.toString();
@@ -41,9 +45,12 @@ function cronometro() {
 }
 
 function pintarCeldaInicial() {
+    x = Math.round(Math.random() * 7);
+    y = Math.round(Math.random() * 7);
     celda = document.getElementById('c' + x + y);
     celda.setAttribute("style", "background-color:green;");
     celda.innerHTML = '&#9816';
+    arrayLimpiar.push(celda);
 }
 
 function registroDeCeldas() {
@@ -91,11 +98,8 @@ function chequeoCelda(celda1, color) {
             bonus--;
             document.getElementById("Bonus").innerHTML = 'Bonus: +' + bonus;
             if (bonus === 0) document.getElementById("Bonus").innerHTML = '';
-            console.log(bonus);
         }
     }
-
-
 
     miArray.forEach(caja1 => {
         if (caja1.x === x2 && caja1.y === y2) {
@@ -112,8 +116,8 @@ function chequeoCelda(celda1, color) {
     }
     contador_Bonus();
     chequeoGanar();
-    document.getElementById("Vidas").innerHTML = 'Vidas: ' + vidas;
-    document.getElementById("Nivel").innerHTML = 'Nivel: ' + nivel;
+    // document.getElementById("Vidas").innerHTML = 'Vidas: ' + vidas;
+    // document.getElementById("Nivel").innerHTML = 'Nivel: ' + nivel;
 }
 
 function armarArray(x1, y1) {
@@ -130,31 +134,31 @@ function pintarCeldaSelec(celda1, color) {
     celda = celda1;
     celda1.style.background = color;
     celda1.innerHTML = '&#9816';
-
+    arrayLimpiar.push(celda1);
+    console.log(miArray);
 }
 
 function inicioJuego() {
     // pedirUsuario();
     setInterval(cronometro, 1000);
-    movimientos = 63;
-    bonus = 0;
-    nivel = 1;
-    x = Math.round(Math.random() * 7);
-    y = Math.round(Math.random() * 7);
+    set_parametros();
+    
     for (i = 0; i < 8; i++) tablero[i] = new Array(8);
     pintarCeldaInicial();
     registroDeCeldas();
-    set_niveles();
-    
 }
 
 function chequeoGanar() {
     ganar = true;
     if (movimientos > 0) ganar = false;
-    if (ganar) alert('Ganaste');
-    // console.log(ganar);
+    if (ganar) {
+        alert('Ganaste');
+        // siguiente_nivel = true;
+        set_parametros();
+    }else{
+        siguiente_nivel = false;
+    }
 }
-
 function chequeoPerder(x2, y2) {
     opciones = 0;
 
@@ -176,7 +180,9 @@ function chequeoMovimiento(x2, y2, mov_x, mov_y) {
     move_x = parseInt(x2) + mov_x;
     move_y = parseInt(y2) + mov_y;
     if (move_x >= 0 && move_x < 8 && move_y >= 0 && move_y < 8) {
-        if (miArray.find(element => { return element.x == move_x && element.y == move_y }) == undefined) {
+        if ((miArray.find(element => { return element.x == move_x && element.y == move_y }) == undefined) &&
+        (miArray.find(element => { return element == celda1 }) == undefined) ) {
+    //falta agregar el undefined para las celdasObstaculos aqui, lo de arriba esta mal
             opciones++;
         }
     }
@@ -189,9 +195,12 @@ function chequeoBonus() {
         pintarBonus();
         clickBonus(celda_bonus);
     }
-    if (opciones == 0 && bonus == 0) alert('Perdiste');
+    if (opciones == 0 && bonus == 0) {
+        alert('Perdiste');
+        siguiente_nivel = false;
+        set_parametros();
+    }
     document.getElementById("Bonus").innerHTML = 'Bonus: +' + bonus
-    // console.log(bonus);
 }
 
 function clickBonus(celda_bonus) {
@@ -222,26 +231,27 @@ function pintarBonus() {
 }
 
 function contador_Bonus() {
-    console.log(movimientosFaltantesBonus);
     if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 1)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 1));
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 1));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
-    } else if (movimientos >  movimientosTotales - (movimientosFaltantesBonus * 2)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 2));
+    } else if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 2)) {
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 2));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
-    } else if (movimientos >  movimientosTotales - (movimientosFaltantesBonus * 3)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 3));
+    } else if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 3)) {
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 3));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
-    } else if (movimientos >  movimientosTotales - (movimientosFaltantesBonus * 4)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 4));
+    } else if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 4)) {
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 4));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
-    } else if (movimientos >  movimientosTotales - (movimientosFaltantesBonus * 5)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 5));
+    } else if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 5)) {
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 5));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
-    } else if (movimientos >  movimientosTotales - (movimientosFaltantesBonus * 6)) {
-        mov_faltantes = movimientos - ( movimientosTotales - (movimientosFaltantesBonus * 6));
+    } else if (movimientos > movimientosTotales - (movimientosFaltantesBonus * 6)) {
+        mov_faltantes = movimientos - (movimientosTotales - (movimientosFaltantesBonus * 6));
         document.getElementById("Movimientos_faltantes").innerHTML = 'Movimientos faltantes bonus: ' + mov_faltantes;
     }
 }
+
+
 
 inicioJuego();
